@@ -34,18 +34,18 @@ The content of `zond_config.lua` should be in the following format:
 ```lua
 return {
     config = {
-		dotpath = 'dotfiles' --  enter path to the folder where your dotfiles are in the repository
-	},
-	mappings = {
-		gitconfig = {
-			source = '.gitconfig', -- the source to the file considering the dotpath entry
-			destination = '~/.gitconfig' -- the place it should be in you local machine
-		},
-		bashrc = {
-			source = '.bashrc',
-			destination = '~/.bashrc'
-		},
-	}
+        dotpath = 'dotfiles' --  enter path to the folder where your dotfiles are in the repository
+    },
+    mappings = {
+        gitconfig = {
+            source = '.gitconfig', -- the source to the file considering the dotpath entry
+            destination = '~/.gitconfig' -- the place it should be in you local machine
+        },
+        bashrc = {
+            source = '.bashrc',
+            destination = '~/.bashrc'
+        },
+    }
 }
 ```
 ## Usage
