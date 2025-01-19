@@ -1,55 +1,53 @@
-> [!NOTE]  
-> Still under development.
-
 # Zond
 
 `Zond` is a CLI tool to help you manage your dotfiles.
 
+# Usage Flow
 
-# *Expected* Usage Flow
+## Installation
 
-## Starting the configuration
+You will need to have Lua installed on you system, then, since `zond` is just a single Lua file, you can just place it into somewhere in your path, like:
 
-The user should have a folder with the following structure:
+```bash
+curl -O https://raw.githubusercontent.com/ivansantiagojr/zond/refs/heads/main/src/zond.lua
+chmod +x zond.lua
+mv zond.lua ~/.local/bin/zond # or move to somewhere in your path
+```
+## Setup
 
-> this just an example and will be better documented.
+The user should have a folder with a `zond_config.lua` file, here is an example:
+
+> My own [dotfiles repo](https://github.com/ivansantiagojr/dotfiles) is using zond, check it out.
 
 ```
 .
 |-- dotfiles
 |   |-- nvim
-|   |-- init.lua
+|       |-- init.lua
 |   |-- .bashrc
 |   |-- .gitconfig
-|-- config.toml
+|-- zond_config.lua
 ```
 
-The content of `config.toml` should be in the following format:
+The content of `zond_config.lua` should be in the following format:
 
-```toml
-[config]
-dotpah = "dotfiles" # enter path to the folder where your dotfiles are in the repository
-
-[mappings]
-bash = {
-    source = ".bashrc", # the source to the file considering the dotpath entry
-    destination = "~/.bashrc" # the place it should be in you local machine
+```lua
+return {
+    config = {
+		dotpath = 'dotfiles' --  enter path to the folder where your dotfiles are in the repository
+	},
+	mappings = {
+		gitconfig = {
+			source = '.gitconfig', -- the source to the file considering the dotpath entry
+			destination = '~/.gitconfig' -- the place it should be in you local machine
+		},
+		bashrc = {
+			source = '.bashrc',
+			destination = '~/.bashrc'
+		},
+	}
 }
 ```
-
-## Using from a new machine
-
-If you got a new computer, or just run a fresh install on yours, that's how you would have your setup.
-
-## Pre-requisites
-
-- Lua
-- Git
-- Zond
-
-## Instalation
-I am thinking if I shouls provide an installation script or a luarocks package, considering I will use dependencies.
-
 ## Usage
 
 Git clone you repository:
@@ -67,11 +65,10 @@ cd your-dotfiles
 Run `zond` to set things up:
 
 ```bash
-zond sync
+zond
 ```
 
 # Notes
 
 `zond` will be heavily inspired on [dotdrop](https://dotdrop.readthedocs.io/en/latest/), but will be very minimal from start.
 
-I am thinking if there should be reverse sync, which reads the config.toml mappings and place the files inside de reposity, just in case the user edited the file directly, and not the repository.
